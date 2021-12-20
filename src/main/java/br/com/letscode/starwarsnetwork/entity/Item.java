@@ -31,8 +31,20 @@ public class Item extends AbstractEntity {
     Set<Inventory> inventaries;
 	
 
-	protected Item() {
+	public Item() {
 	}
+
+
+	public Item(long id,String name,  int value) {
+		this.id = id;
+		this.name = name;
+		this.value = value;
+	}
+	
+	public Item(String name) {
+		this.name = name;
+	}
+	
 	
 	
 }

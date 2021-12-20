@@ -24,6 +24,8 @@ public class Base extends AbstractEntity {
 	public Base(long id) {
 		this.id = id;
 	}
+	
+	
 	/**
 	 * 
 	 */

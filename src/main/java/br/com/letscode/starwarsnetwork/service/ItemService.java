@@ -1,6 +1,7 @@
 package br.com.letscode.starwarsnetwork.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,10 @@ public class ItemService {
 	
 	public List<Item> listAll(){
 		return itemRepository.findAll();
+	}
+
+	public Optional<Item> findByName(String name) {
+		return itemRepository.findByName(name);
 	}
 	
 	

@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
-import org.springdoc.core.annotations.RouterOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,13 +23,7 @@ import br.com.letscode.starwarsnetwork.entity.Base;
 import br.com.letscode.starwarsnetwork.entity.Inventory;
 import br.com.letscode.starwarsnetwork.entity.Item;
 import br.com.letscode.starwarsnetwork.entity.Rebel;
-import br.com.letscode.starwarsnetwork.service.InventoryService;
-import br.com.letscode.starwarsnetwork.service.ItemService;
 import br.com.letscode.starwarsnetwork.service.RebelService;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 @RestController
 @RequestMapping("v1/rebels")
@@ -38,21 +31,13 @@ public class RebelController {
 
 
 	private final RebelService rebelService;
-	private final ItemService itemService;
-	private final InventoryService inventaryService;
 
 	@Autowired
-	public RebelController(RebelService rebelService, ItemService itemService, InventoryService inventaryService) {
+	public RebelController(RebelService rebelService) {
 		this.rebelService = rebelService;
-		this.itemService =  itemService;
-		this.inventaryService = inventaryService;
 	}
 	
 	@PostMapping()
-	@RouterOperation(operation = @Operation(operationId = "save", summary = "Create new rebel", description = "Create new rebel",
-    responses = { @ApiResponse(responseCode = "200", description = "Rebel created with success", content = @Content(schema = @Schema(implementation = Rebel.class))),
-          @ApiResponse(responseCode = "304", description = "Invalid Operation"),
-          @ApiResponse(responseCode = "500", description = "Internal error") }))
 	@Transactional(rollbackFor = Exception.class)
 	public ResponseEntity<?> save(@Valid @RequestBody Rebel rebel){
 		if(rebel.getId() != null) {

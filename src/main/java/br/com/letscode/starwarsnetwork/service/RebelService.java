@@ -18,16 +18,14 @@ import br.com.letscode.starwarsnetwork.repository.RebelRepository;
 public class RebelService {
 
 	private final RebelRepository rebelRepository;
-	
 	private final BaseRepository baseRepository;
-	
-	private final ItemRepository ItemRepository;
+	private final ItemRepository itemRepository;
 
 	@Autowired
 	public RebelService(RebelRepository rebelRepository, BaseRepository baseRepository, ItemRepository itemRepository) {
 		this.rebelRepository = rebelRepository;
 		this.baseRepository = baseRepository;
-		this.ItemRepository = itemRepository;
+		this.itemRepository = itemRepository;
 	}
 	
 	public void create( Rebel rebel) throws Exception {
@@ -35,7 +33,7 @@ public class RebelService {
 		if(!base.isPresent()) 
 			throw new Exception("Base not found");
 		for(Inventory inventary: rebel.getInventaries()) {
-			Optional<Item> item = ItemRepository.findByName(inventary.getItem().getName());
+			Optional<Item> item = itemRepository.findByName(inventary.getItem().getName());
 			if(!item.isPresent())
 				throw new Exception("Item not found: " + inventary.getItem().getName());
 			inventary.setItem(item.get());
